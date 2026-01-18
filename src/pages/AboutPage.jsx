@@ -1,91 +1,71 @@
 import { Link } from 'react-router-dom';
-import { FaCheckCircle, FaLightbulb, FaCogs, FaChartBar, FaHandshake } from 'react-icons/fa';
+import { FaLightbulb, FaUsers, FaChartLine } from 'react-icons/fa';
+import { useLanguage } from '../i18n/LanguageContext';
 import './AboutPage.css';
 
 const AboutPage = () => {
-    const philosophy = [
-        { icon: <FaLightbulb />, title: 'Analiz', desc: 'İşinizi, hedef kitlenizi ve rakiplerinizi derinlemesine analiz ederek başlarız.' },
-        { icon: <FaCogs />, title: 'Planlama', desc: 'Veriye dayalı stratejiler ve yol haritaları oluştururuz.' },
-        { icon: <FaCheckCircle />, title: 'Üretim', desc: 'Tasarım, yazılım ve içerik üretimini en yüksek standartlarda gerçekleştiririz.' },
-        { icon: <FaChartBar />, title: 'Ölçümleme', desc: 'Sonuçları ölçer, raporlar ve sürekli optimizasyon yaparız.' }
-    ];
+    const { t, language } = useLanguage();
+
+    if (!t) return null;
 
     return (
         <div className="about-page">
-            {/* Page Header */}
             <div className="page-header">
                 <div className="container">
                     <div className="breadcrumb">
-                        <Link to="/">Anasayfa</Link>
+                        <Link to="/">{t.nav.home}</Link>
                         <span>/</span>
-                        <span>Hakkımızda</span>
+                        <span>{t.nav.about}</span>
                     </div>
-                    <h1>Hakkımızda</h1>
-                    <p>Akgul Medya olarak dijitalde görünür olmayı bir hedef değil, ölçülebilir büyümeye giden yolun doğal sonucu olarak görüyoruz.</p>
+                    <h1>{t.about.title}</h1>
+                    <p>{t.about.subtitle}</p>
                 </div>
             </div>
 
-            {/* About Content */}
             <section className="about-content section">
                 <div className="container">
                     <div className="about-grid">
                         <div className="about-text">
-                            <h2>Bizim Yaklaşımımız</h2>
+                            <h2>{language === 'tr' ? 'Biz Kimiz?' : 'Who Are We?'}</h2>
                             <p>
-                                Strateji, kreatif, yazılım ve performansı aynı masada birleştiren bir büyüme partneri gibi çalışırız.
-                                İstanbul merkezli bir ajansız; ama işimizi yalnızca bir lokasyona sığdırmayız.
+                                {language === 'tr'
+                                    ? 'Akgul Medya, dijital dünyada markaların hikayelerini anlatmalarına yardımcı olan yaratıcı bir ajans olarak 2024 yılında kurulmuştur. Web tasarımından sosyal medya yönetimine, SEO\'dan video prodüksiyona kadar geniş bir yelpazede hizmet sunuyoruz.'
+                                    : 'Akgul Medya was founded in 2024 as a creative agency that helps brands tell their stories in the digital world. We offer a wide range of services from web design to social media management, SEO to video production.'
+                                }
                             </p>
                             <p>
-                                Yerel markalardan ulusal ölçeğe, e-ticaretten B2B yapılara, hizmet sektöründen çok lokasyonlu markalara kadar
-                                farklı ihtiyaçlara sahip işletmelerle çalışırız. Her işte tek bir ortak çizgimiz var:
-                                "Güzel görünsün" ile yetinmeyiz; "işe yarasın, büyütsün, sürdürülebilir olsun" isteriz.
+                                {language === 'tr'
+                                    ? 'Müşterilerimizin dijital dönüşüm süreçlerinde güvenilir bir ortak olmayı hedefliyoruz. Modern teknolojiler ve yaratıcı çözümlerle işletmelerin büyümesine katkı sağlıyoruz.'
+                                    : 'We aim to be a reliable partner in our customers\' digital transformation processes. We contribute to the growth of businesses with modern technologies and creative solutions.'
+                                }
                             </p>
-                            <ul className="about-features">
-                                <li><FaCheckCircle /> 150+ Tamamlanan Proje</li>
-                                <li><FaCheckCircle /> 50+ Mutlu Müşteri</li>
-                                <li><FaCheckCircle /> 5+ Yıllık Deneyim</li>
-                                <li><FaCheckCircle /> 24/7 Destek Hizmeti</li>
-                            </ul>
                         </div>
-                        <div className="about-image">
-                            <div className="image-placeholder">
-                                <FaHandshake />
+                    </div>
+
+                    {/* Philosophy Cards */}
+                    <div className="philosophy-section">
+                        <h2 className="section-title">{language === 'tr' ? 'Değerlerimiz' : 'Our Values'}</h2>
+                        <div className="philosophy-grid">
+                            <div className="philosophy-card">
+                                <div className="philosophy-icon"><FaLightbulb /></div>
+                                <h3>{language === 'tr' ? 'Yenilikçi Yaklaşım' : 'Innovative Approach'}</h3>
+                                <p>{language === 'tr' ? 'Güncel trendleri ve teknolojileri yakından takip ederek projelerinize en yenilikçi çözümleri sunuyoruz.' : 'We offer the most innovative solutions for your projects by following current trends and technologies.'}</p>
+                            </div>
+                            <div className="philosophy-card">
+                                <div className="philosophy-icon"><FaUsers /></div>
+                                <h3>{language === 'tr' ? 'Müşteri Odaklı' : 'Customer Focused'}</h3>
+                                <p>{language === 'tr' ? 'Her projeyi müşterimizin ihtiyaçlarına göre özelleştiriyor, birlikte başarıya ulaşıyoruz.' : 'We customize each project according to our customer\'s needs and achieve success together.'}</p>
+                            </div>
+                            <div className="philosophy-card">
+                                <div className="philosophy-icon"><FaChartLine /></div>
+                                <h3>{language === 'tr' ? 'Sonuç Odaklı' : 'Result Oriented'}</h3>
+                                <p>{language === 'tr' ? 'Ölçülebilir başarılar elde etmeye odaklanıyor, ROI\'nizi maksimize ediyoruz.' : 'We focus on achieving measurable success and maximize your ROI.'}</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            {/* Philosophy Section */}
-            <section className="philosophy section" id="misyon">
-                <div className="container">
-                    <div className="section-title">
-                        <h2>Çalışma Felsefemiz</h2>
-                        <p>Önce analiz ederiz, sonra planlarız, sonra üretiriz, en sonunda da ölçeriz. Bu döngü asla bitmez.</p>
-                    </div>
-
-                    <div className="philosophy-grid">
-                        {philosophy.map((item, index) => (
-                            <div key={index} className="philosophy-card">
-                                <div className="philosophy-icon">{item.icon}</div>
-                                <h3>{item.title}</h3>
-                                <p>{item.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* CTA */}
-            <section className="about-cta section">
-                <div className="container">
-                    <div className="cta-box">
-                        <h2>Dijital Büyüme Yolculuğunuza Başlayın</h2>
-                        <p>Projelerinizi hayata geçirmek için ekibimizle iletişime geçin.</p>
-                        <Link to="/iletisim" className="btn btn-primary">
-                            İletişime Geç
-                        </Link>
-                    </div>
+                    {/* CTA Box */}
+                    {/* CTA Box Removed as per request */}
                 </div>
             </section>
         </div>

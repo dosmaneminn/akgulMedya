@@ -1,88 +1,40 @@
 import { Link } from 'react-router-dom';
-import { FaGlobe, FaChartLine, FaHashtag, FaVideo, FaShoppingCart, FaPalette, FaArrowRight } from 'react-icons/fa';
+import { FaGlobe, FaHashtag, FaVideo, FaChartLine, FaPalette, FaArrowRight, FaStar } from 'react-icons/fa';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './ServicesPreview.css';
 
 const ServicesPreview = () => {
-    const iconMap = {
-        FaGlobe: <FaGlobe />,
-        FaChartLine: <FaChartLine />,
-        FaHashtag: <FaHashtag />,
-        FaVideo: <FaVideo />,
-        FaShoppingCart: <FaShoppingCart />,
-        FaPalette: <FaPalette />
-    };
+    const { t, language } = useLanguage();
 
     const services = [
-        {
-            slug: 'kurumsal-web-tasarim',
-            title: 'Kurumsal Web Tasarım',
-            description: 'Türkiye\'deki küçük büyük tüm işletmeler için %100 SEO uyumlu, hızı optimize edilmiş web sitesi çözümleri.',
-            icon: 'FaGlobe'
-        },
-        {
-            slug: 'seo-dijital-pazarlama',
-            title: 'SEO & Dijital Pazarlama',
-            description: 'Google aramalarında rakiplerinizin önüne geçin. Teknik SEO, yerel SEO ve Google Ads yönetimi.',
-            icon: 'FaChartLine'
-        },
-        {
-            slug: 'sosyal-medya-yonetimi',
-            title: 'Sosyal Medya Yönetimi',
-            description: 'Facebook, Instagram, LinkedIn ve TikTok gibi platformlarda markanızın yönetimini üstleniyoruz.',
-            icon: 'FaHashtag'
-        },
-        {
-            slug: 'produksiyon-hizmeti',
-            title: 'Prodüksiyon Hizmeti',
-            description: 'Prodüksiyon ve post prodüksiyon hizmetlerimiz ile markanızın dijitaldeki imajını taşıyoruz.',
-            icon: 'FaVideo'
-        },
-        {
-            slug: 'e-ticaret-cozumleri',
-            title: 'E-Ticaret Çözümleri',
-            description: 'Güvenli ödeme altyapıları, pazaryeri entegrasyonları ve gelişmiş sepet modülleri.',
-            icon: 'FaShoppingCart'
-        },
-        {
-            slug: 'marka-danismanligi',
-            title: 'Marka Danışmanlığı',
-            description: 'Markanızı baştan aşağıya ele alarak tüm ihtiyaçlarınıza tek çatı altından çözümler sunuyoruz.',
-            icon: 'FaPalette'
-        }
+        { key: 'webDesign', icon: <FaGlobe /> },
+        { key: 'socialMedia', icon: <FaHashtag /> },
+        { key: 'production', icon: <FaVideo /> },
+        { key: 'seo', icon: <FaChartLine /> },
+        { key: 'logo', icon: <FaPalette /> },
+        { key: 'googleReview', icon: <FaStar /> }
     ];
 
     return (
         <section className="services-preview section">
             <div className="container">
-                <div className="section-title">
-                    <h2>Dijital Çözüm Alanlarımız</h2>
-                    <p>
-                        Markanızı geleceğe taşıyacak mobil uyumlu web siteleri, özel yazılımlar ve e-ticaret platformları tasarlıyoruz.
-                    </p>
+                <div className="section-header">
+                    <span className="section-tag">{t.nav.services}</span>
+                    <h2>{language === 'tr' ? 'Dijital Çözüm Alanlarımız' : 'Our Digital Solutions'}</h2>
+                    <p>{t.services.subtitle}</p>
                 </div>
-
                 <div className="services-grid">
-                    {services.map((service, index) => (
-                        <Link
-                            key={index}
-                            to={`/hizmetler/${service.slug}`}
-                            className="service-card"
-                        >
-                            <div className="service-icon">
-                                {iconMap[service.icon]}
-                            </div>
-                            <h3>{service.title}</h3>
-                            <p>{service.description}</p>
-                            <span className="service-link">
-                                Detaylı İncele <FaArrowRight />
-                            </span>
-                        </Link>
+                    {services.map((service) => (
+                        <div key={service.key} className="service-card">
+                            <div className="service-icon">{service.icon}</div>
+                            <h3>{t.services.items[service.key].title}</h3>
+                            <p>{t.services.items[service.key].desc}</p>
+                        </div>
                     ))}
                 </div>
-
                 <div className="services-cta">
-                    <Link to="/hizmetler" className="btn btn-primary">
-                        Tüm Hizmetlerimiz
+                    <Link to={language === 'tr' ? '/hizmetler' : '/services'} className="btn btn-outline">
+                        {language === 'tr' ? 'Tüm Hizmetlerimiz' : 'All Services'}
                         <FaArrowRight />
                     </Link>
                 </div>

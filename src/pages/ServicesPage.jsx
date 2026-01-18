@@ -1,36 +1,38 @@
 import { Link } from 'react-router-dom';
-import { FaQrcode, FaPlane, FaGlobe, FaVideo, FaRobot, FaCamera, FaHashtag, FaBullhorn, FaChartLine, FaStar, FaPalette, FaCrown, FaArrowRight } from 'react-icons/fa';
-import { services } from '../data/services';
+import { FaQrcode, FaPlane, FaGlobe, FaVideo, FaRobot, FaCamera, FaHashtag, FaBullhorn, FaChartLine, FaStar, FaPalette, FaCrown } from 'react-icons/fa';
+import { useLanguage } from '../i18n/LanguageContext';
 import './ServicesPage.css';
 
 const ServicesPage = () => {
-    const iconMap = {
-        FaQrcode: <FaQrcode />,
-        FaPlane: <FaPlane />,
-        FaGlobe: <FaGlobe />,
-        FaVideo: <FaVideo />,
-        FaRobot: <FaRobot />,
-        FaCamera: <FaCamera />,
-        FaHashtag: <FaHashtag />,
-        FaBullhorn: <FaBullhorn />,
-        FaChartLine: <FaChartLine />,
-        FaStar: <FaStar />,
-        FaPalette: <FaPalette />,
-        FaCrown: <FaCrown />
-    };
+    const { t, language } = useLanguage();
+
+    const services = [
+        { key: 'qrMenu', icon: <FaQrcode /> },
+        { key: 'drone', icon: <FaPlane /> },
+        { key: 'webDesign', icon: <FaGlobe /> },
+        { key: 'production', icon: <FaVideo /> },
+        { key: 'n8n', icon: <FaRobot /> },
+        { key: 'photo', icon: <FaCamera /> },
+        { key: 'socialMedia', icon: <FaHashtag /> },
+        { key: 'metaAds', icon: <FaBullhorn /> },
+        { key: 'seo', icon: <FaChartLine /> },
+        { key: 'googleReview', icon: <FaStar /> },
+        { key: 'logo', icon: <FaPalette /> },
+        { key: 'brand', icon: <FaCrown /> }
+    ];
 
     return (
         <div className="services-page">
             <div className="page-header">
                 <div className="container">
                     <div className="breadcrumb">
-                        <Link to="/">Anasayfa</Link>
+                        <Link to="/">{t.nav.home}</Link>
                         <span>/</span>
-                        <span>Hizmetlerimiz</span>
+                        <span>{t.nav.services}</span>
                     </div>
-                    <h1>Hizmetlerimiz</h1>
-                    <p>Dijital dünyanın tüm ihtiyaçlarınız için profesyonel çözümler sunuyoruz.</p>
-                    <span className="service-count">Toplam: {services.length} hizmet</span>
+                    <h1>{t.services.title}</h1>
+                    <p>{t.services.subtitle}</p>
+                    <span className="service-count">{t.services.total}: {services.length}</span>
                 </div>
             </div>
 
@@ -38,10 +40,10 @@ const ServicesPage = () => {
                 <div className="container">
                     <div className="services-grid">
                         {services.map((service) => (
-                            <div key={service.id} className="service-card">
-                                <div className="service-icon">{iconMap[service.icon]}</div>
-                                <h3>{service.title}</h3>
-                                <p>{service.shortDesc}</p>
+                            <div key={service.key} className="service-card">
+                                <div className="service-icon">{service.icon}</div>
+                                <h3>{t.services.items[service.key].title}</h3>
+                                <p>{t.services.items[service.key].desc}</p>
                             </div>
                         ))}
                     </div>

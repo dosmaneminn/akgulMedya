@@ -1,29 +1,22 @@
 import { Link } from 'react-router-dom';
-import { FaArrowRight, FaPhone } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './ContactCTA.css';
 
 const ContactCTA = () => {
+    const { t, language } = useLanguage();
+
     return (
-        <section className="contact-cta">
+        <section className="contact-cta section">
+            <div className="cta-bg"></div>
             <div className="container">
                 <div className="cta-content">
-                    <div className="cta-text">
-                        <h2>Projenizi Hayata Geçirelim</h2>
-                        <p>
-                            Dijital varlığınızı güçlendirmek için doğru yerdesiniz.
-                            Profesyonel ekibimiz, projenizi en yüksek standartlarda hayata geçirmek için hazır.
-                        </p>
-                    </div>
-                    <div className="cta-actions">
-                        <Link to="/iletisim" className="btn btn-primary">
-                            Ücretsiz Teklif Al
-                            <FaArrowRight />
-                        </Link>
-                        <a href="tel:+905001234567" className="btn btn-secondary">
-                            <FaPhone />
-                            Hemen Ara
-                        </a>
-                    </div>
+                    <h2>{t.cta.title}</h2>
+                    <p>{t.cta.subtitle}</p>
+                    <Link to={language === 'tr' ? '/iletisim' : '/contact'} className="btn btn-primary btn-lg">
+                        {t.cta.button}
+                        <FaArrowRight />
+                    </Link>
                 </div>
             </div>
         </section>

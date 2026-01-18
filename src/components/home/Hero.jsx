@@ -1,20 +1,22 @@
-import { Link } from 'react-router-dom';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Hero.css';
 
 const Hero = () => {
+    const { t } = useLanguage();
+
     const services = [
-        'QR Menü',
-        'Drone Çekimi',
-        'Web Tasarımı',
-        'Prodüksiyon',
-        'n8n Otomasyonları',
-        'Fotoğraf & Video Çekimi',
-        'Sosyal Medya Yönetimi',
-        'Meta Reklamları',
-        'SEO',
-        'Google Yorum Desteği',
-        'Logo Tasarımı',
-        'Marka Yönetimi'
+        t.services.items.qrMenu.title,
+        t.services.items.drone.title,
+        t.services.items.webDesign.title,
+        t.services.items.production.title,
+        t.services.items.n8n.title,
+        t.services.items.photo.title,
+        t.services.items.socialMedia.title,
+        t.services.items.metaAds.title,
+        t.services.items.seo.title,
+        t.services.items.googleReview.title,
+        t.services.items.logo.title,
+        t.services.items.brand.title
     ];
 
     return (
@@ -27,11 +29,8 @@ const Hero = () => {
 
             <div className="container">
                 <div className="hero-content">
-                    <h1>Dijitalde Sınırları Aş</h1>
-                    <p>
-                        Akgul Medya, markanızı bugünden geleceğe taşıyan tam kapsamlı dijital çözüm ortağınız.
-                        Strateji, tasarım ve teknolojiyi birleştirerek işinizi büyüten çözümler üretiyoruz.
-                    </p>
+                    <h1>{t.hero.title}</h1>
+                    <p>{t.hero.subtitle}</p>
                 </div>
 
                 {/* Marquee Services */}

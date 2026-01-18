@@ -1,21 +1,24 @@
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Footer.css';
 
 const Footer = () => {
+    const { t, language } = useLanguage();
+
     const quickLinks = [
-        { path: '/hakkimizda', label: 'Hakkımızda' },
-        { path: '/hizmetler', label: 'Hizmetlerimiz' },
-        { path: '/isbirlikleri', label: 'İş Birlikleri' },
-        { path: '/iletisim', label: 'İletişim' }
+        { path: language === 'tr' ? '/hakkimizda' : '/about', label: t.nav.about },
+        { path: language === 'tr' ? '/hizmetler' : '/services', label: t.nav.services },
+        { path: language === 'tr' ? '/isbirlikleri' : '/partnerships', label: t.nav.partnerships },
+        { path: language === 'tr' ? '/iletisim' : '/contact', label: t.nav.contact }
     ];
 
     const services = [
-        { path: '/hizmetler/web-tasarimi', label: 'Web Tasarımı' },
-        { path: '/hizmetler/sosyal-medya-yonetimi', label: 'Sosyal Medya' },
-        { path: '/hizmetler/seo', label: 'SEO' },
-        { path: '/hizmetler/produksiyon', label: 'Prodüksiyon' },
-        { path: '/hizmetler/logo-tasarimi', label: 'Logo Tasarımı' }
+        { path: language === 'tr' ? '/hizmetler' : '/services', label: t.services.items.webDesign.title },
+        { path: language === 'tr' ? '/hizmetler' : '/services', label: t.services.items.socialMedia.title },
+        { path: language === 'tr' ? '/hizmetler' : '/services', label: t.services.items.seo.title },
+        { path: language === 'tr' ? '/hizmetler' : '/services', label: t.services.items.production.title },
+        { path: language === 'tr' ? '/hizmetler' : '/services', label: t.services.items.logo.title }
     ];
 
     return (
@@ -29,10 +32,7 @@ const Footer = () => {
                                 <span className="logo-text">Akgul</span>
                                 <span className="logo-highlight">Medya</span>
                             </Link>
-                            <p className="footer-desc">
-                                Dijital dünyanın öncü ajansı olarak, markanızı geleceğe taşıyoruz.
-                                360 derece dijital çözümlerle büyümenize katkı sağlıyoruz.
-                            </p>
+                            <p className="footer-desc">{t.footer.desc}</p>
                             <div className="footer-social">
                                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                                     <FaFacebookF />
@@ -51,7 +51,7 @@ const Footer = () => {
 
                         {/* Quick Links */}
                         <div className="footer-column">
-                            <h4>Hızlı Menü</h4>
+                            <h4>{t.footer.quickMenu}</h4>
                             <ul className="footer-links">
                                 {quickLinks.map((link, index) => (
                                     <li key={index}>
@@ -63,7 +63,7 @@ const Footer = () => {
 
                         {/* Services */}
                         <div className="footer-column">
-                            <h4>Hizmetlerimiz</h4>
+                            <h4>{t.footer.services}</h4>
                             <ul className="footer-links">
                                 {services.map((link, index) => (
                                     <li key={index}>
@@ -75,7 +75,7 @@ const Footer = () => {
 
                         {/* Contact */}
                         <div className="footer-column">
-                            <h4>Bize Ulaşın</h4>
+                            <h4>{t.footer.contact}</h4>
                             <ul className="footer-contact">
                                 <li>
                                     <FaMapMarkerAlt />
@@ -99,10 +99,10 @@ const Footer = () => {
             <div className="footer-bottom">
                 <div className="container">
                     <div className="footer-bottom-content">
-                        <p>© 2026 Akgul Medya. Tüm Hakları Saklıdır.</p>
+                        <p>{t.footer.copyright}</p>
                         <div className="footer-legal">
                             <Link to="/kvkk">KVKK</Link>
-                            <Link to="/gizlilik">Gizlilik Politikası</Link>
+                            <Link to="/gizlilik">{t.footer.privacy}</Link>
                         </div>
                     </div>
                 </div>

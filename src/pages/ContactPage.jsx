@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaPaperPlane, FaSpinner } from 'react-icons/fa';
+import { useLanguage } from '../i18n/LanguageContext';
 import './ContactPage.css';
 
 const ContactPage = () => {
+    const { t, language } = useLanguage();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -23,17 +25,15 @@ const ContactPage = () => {
         setIsSubmitting(true);
         setSubmitStatus(null);
 
-        // mailto: link ile form gönderimi
-        const subject = encodeURIComponent(`[Web Formu] ${formData.subject || 'İletişim Formu'}`);
+        const subject = encodeURIComponent(`[Web Form] ${formData.subject || 'Contact Form'}`);
         const body = encodeURIComponent(
-            `Ad Soyad: ${formData.name}\n` +
-            `E-posta: ${formData.email}\n` +
-            `Telefon: ${formData.phone || 'Belirtilmedi'}\n` +
-            `Konu: ${formData.subject || 'Belirtilmedi'}\n\n` +
-            `Mesaj:\n${formData.message}`
+            `Name: ${formData.name}\n` +
+            `Email: ${formData.email}\n` +
+            `Phone: ${formData.phone || 'Not provided'}\n` +
+            `Subject: ${formData.subject || 'Not provided'}\n\n` +
+            `Message:\n${formData.message}`
         );
 
-        // E-posta uygulamasını aç
         window.location.href = `mailto:akgulmedya7@gmail.com?subject=${subject}&body=${body}`;
 
         setTimeout(() => {
@@ -48,12 +48,12 @@ const ContactPage = () => {
             <div className="page-header">
                 <div className="container">
                     <div className="breadcrumb">
-                        <Link to="/">Anasayfa</Link>
+                        <Link to="/">{t.nav.home}</Link>
                         <span>/</span>
-                        <span>İletişim</span>
+                        <span>{t.nav.contact}</span>
                     </div>
-                    <h1>İletişim</h1>
-                    <p>Projeleriniz, demo talepleriniz veya fiyat teklifleriniz için bize ulaşın.</p>
+                    <h1>{t.contact.title}</h1>
+                    <p>{t.contact.subtitle}</p>
                 </div>
             </div>
 
@@ -62,12 +62,12 @@ const ContactPage = () => {
                     <div className="contact-grid">
                         {/* Contact Form */}
                         <div className="contact-form-wrapper">
-                            <h2>Bize Yazın</h2>
-                            <p className="form-desc">Formu doldurun, en kısa sürede size dönüş yapalım.</p>
+                            <h2>{t.contact.form.title}</h2>
+                            <p className="form-desc">{t.contact.form.subtitle}</p>
                             <form onSubmit={handleSubmit} className="contact-form">
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label htmlFor="name">Adınız Soyadınız *</label>
+                                        <label htmlFor="name">{t.contact.form.name} *</label>
                                         <input
                                             type="text"
                                             id="name"
@@ -78,7 +78,7 @@ const ContactPage = () => {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="email">E-posta Adresiniz *</label>
+                                        <label htmlFor="email">{t.contact.form.email} *</label>
                                         <input
                                             type="email"
                                             id="email"
@@ -91,7 +91,7 @@ const ContactPage = () => {
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label htmlFor="phone">Telefon Numaranız</label>
+                                        <label htmlFor="phone">{t.contact.form.phone}</label>
                                         <input
                                             type="tel"
                                             id="phone"
@@ -101,25 +101,21 @@ const ContactPage = () => {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="subject">Konu</label>
+                                        <label htmlFor="subject">{t.contact.form.subject}</label>
                                         <select
                                             id="subject"
                                             name="subject"
                                             value={formData.subject}
                                             onChange={handleChange}
                                         >
-                                            <option value="">Seçiniz</option>
-                                            <option value="Web Tasarım">Web Tasarım</option>
-                                            <option value="Sosyal Medya">Sosyal Medya Yönetimi</option>
-                                            <option value="Prodüksiyon">Prodüksiyon</option>
-                                            <option value="SEO">SEO</option>
-                                            <option value="Logo Tasarım">Logo Tasarım</option>
-                                            <option value="Diğer">Diğer</option>
+                                            {t.contact.subjects.map((subj, idx) => (
+                                                <option key={idx} value={idx === 0 ? '' : subj}>{subj}</option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="message">Mesajınız *</label>
+                                    <label htmlFor="message">{t.contact.form.message} *</label>
                                     <textarea
                                         id="message"
                                         name="message"
@@ -127,23 +123,23 @@ const ContactPage = () => {
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        placeholder="Projeniz hakkında detaylı bilgi verin..."
+                                        placeholder={t.contact.form.placeholder}
                                     ></textarea>
                                 </div>
                                 <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
                                     {isSubmitting ? (
                                         <>
-                                            <FaSpinner className="spinner" /> Gönderiliyor...
+                                            <FaSpinner className="spinner" /> {t.contact.form.sending}
                                         </>
                                     ) : (
                                         <>
-                                            <FaPaperPlane /> Mesaj Gönder
+                                            <FaPaperPlane /> {t.contact.form.send}
                                         </>
                                     )}
                                 </button>
                                 {submitStatus === 'success' && (
                                     <div className="success-message">
-                                        ✓ E-posta uygulamanız açıldı. Mesajınızı göndermek için "Gönder" butonuna tıklayın.
+                                        ✓ {t.contact.form.success}
                                     </div>
                                 )}
                             </form>
@@ -151,28 +147,28 @@ const ContactPage = () => {
 
                         {/* Contact Info */}
                         <div className="contact-info">
-                            <h3>Bize Ulaşın</h3>
-                            <p>Ofisimizi ziyaret edebilir veya bizi arayabilirsiniz.</p>
+                            <h3>{t.contact.info.title}</h3>
+                            <p>{t.contact.info.subtitle}</p>
 
                             <div className="info-cards">
                                 <div className="info-card">
                                     <div className="info-icon"><FaMapMarkerAlt /></div>
                                     <div>
-                                        <h4>Adres</h4>
+                                        <h4>{t.contact.info.address}</h4>
                                         <p>Muğla, Türkiye</p>
                                     </div>
                                 </div>
                                 <div className="info-card">
                                     <div className="info-icon"><FaPhone /></div>
                                     <div>
-                                        <h4>Telefon</h4>
+                                        <h4>{t.contact.info.phone}</h4>
                                         <a href="tel:+905301764835">+90 530 176 48 35</a>
                                     </div>
                                 </div>
                                 <div className="info-card">
                                     <div className="info-icon"><FaEnvelope /></div>
                                     <div>
-                                        <h4>E-posta</h4>
+                                        <h4>{t.contact.info.email}</h4>
                                         <a href="mailto:akgulmedya7@gmail.com">akgulmedya7@gmail.com</a>
                                     </div>
                                 </div>
@@ -180,7 +176,7 @@ const ContactPage = () => {
                                     <div className="info-icon whatsapp"><FaWhatsapp /></div>
                                     <div>
                                         <h4>WhatsApp</h4>
-                                        <span>Hemen Yazın</span>
+                                        <span>{t.contact.info.whatsapp}</span>
                                     </div>
                                 </a>
                             </div>

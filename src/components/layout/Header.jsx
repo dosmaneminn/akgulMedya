@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes, FaPhone, FaEnvelope, FaChevronDown, FaWhatsapp, FaGlobe } from 'react-icons/fa';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Header.css';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
-    const [language, setLanguage] = useState('TR');
+    const { language, t, toggleLanguage } = useLanguage();
     const location = useLocation();
 
     useEffect(() => {
@@ -23,23 +24,19 @@ const Header = () => {
         setActiveDropdown(null);
     }, [location]);
 
-    const toggleLanguage = () => {
-        setLanguage(language === 'TR' ? 'EN' : 'TR');
-    };
-
     const menuItems = [
-        { path: '/', label: 'Ana Sayfa' },
+        { path: '/', label: t.nav.home },
         {
-            path: '/hakkimizda',
-            label: 'Kurumsal',
+            path: language === 'tr' ? '/hakkimizda' : '/about',
+            label: t.nav.corporate,
             dropdown: [
-                { path: '/hakkimizda', label: 'Hakkımızda' },
-                { path: '/hakkimizda#misyon', label: 'Misyon & Vizyon' }
+                { path: language === 'tr' ? '/hakkimizda' : '/about', label: t.nav.about },
+                { path: language === 'tr' ? '/hakkimizda#misyon' : '/about#mission', label: t.nav.mission }
             ]
         },
-        { path: '/hizmetler', label: 'Hizmetlerimiz' },
-        { path: '/isbirlikleri', label: 'İş Birlikleri' },
-        { path: '/iletisim', label: 'İletişim' }
+        { path: language === 'tr' ? '/hizmetler' : '/services', label: t.nav.services },
+        { path: language === 'tr' ? '/isbirlikleri' : '/partnerships', label: t.nav.partnerships },
+        { path: language === 'tr' ? '/iletisim' : '/contact', label: t.nav.contact }
     ];
 
     return (
@@ -114,7 +111,7 @@ const Header = () => {
                             {/* Language Toggle */}
                             <button className="language-toggle" onClick={toggleLanguage}>
                                 <FaGlobe />
-                                <span>{language}</span>
+                                <span>{language.toUpperCase()}</span>
                             </button>
 
                             <button
