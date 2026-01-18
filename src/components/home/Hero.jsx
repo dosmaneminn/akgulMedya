@@ -1,8 +1,16 @@
+import { useState, useEffect } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import './Hero.css';
 
 const Hero = () => {
     const { t } = useLanguage();
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        // Trigger animations after mount
+        const timer = setTimeout(() => setIsLoaded(true), 100);
+        return () => clearTimeout(timer);
+    }, []);
 
     const services = [
         t.services.items.qrMenu.title,
@@ -28,13 +36,13 @@ const Hero = () => {
             </div>
 
             <div className="container">
-                <div className="hero-content">
-                    <h1>{t.hero.title}</h1>
-                    <p>{t.hero.subtitle}</p>
+                <div className={`hero-content ${isLoaded ? 'loaded' : ''}`}>
+                    <h1 className="hero-title">{t.hero.title}</h1>
+                    <p className="hero-subtitle">{t.hero.subtitle}</p>
                 </div>
 
                 {/* Marquee Services */}
-                <div className="hero-marquee">
+                <div className={`hero-marquee ${isLoaded ? 'loaded' : ''}`}>
                     <div className="marquee-track">
                         {[...services, ...services].map((service, index) => (
                             <span key={index} className="marquee-item">

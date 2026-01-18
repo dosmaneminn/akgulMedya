@@ -3,6 +3,40 @@
     background: var(--bg-primary);
 }
 
+/* Section Header with reveal animation support */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(107, 203, 119, 0.1);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.section-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 16px;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-header p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--text-secondary);
+}
+
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -14,15 +48,34 @@
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 32px;
-    transition: var(--transition-normal);
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* FLPR-style enhanced hover effect */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
 }
 
 .service-card:hover {
     border-color: var(--accent-primary);
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(107, 203, 119, 0.15);
 }
 
 .service-icon {
@@ -36,18 +89,24 @@
     font-size: 24px;
     color: var(--accent-primary);
     margin-bottom: 20px;
-    transition: var(--transition-normal);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .service-card:hover .service-icon {
     background: var(--accent-gradient);
     color: white;
+    transform: scale(1.1) rotate(5deg);
 }
 
 .service-card h3 {
     font-size: 1.2rem;
     margin-bottom: 12px;
     color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.service-card:hover h3 {
+    color: var(--accent-primary);
 }
 
 .service-card p {
@@ -76,6 +135,20 @@
     margin-top: 48px;
 }
 
+.services-cta .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.services-cta .btn-outline svg {
+    transition: transform 0.3s ease;
+}
+
+.services-cta .btn-outline:hover svg {
+    transform: translateX(5px);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .services-grid {
@@ -86,5 +159,9 @@
 @media (max-width: 640px) {
     .services-grid {
         grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
     }
 }

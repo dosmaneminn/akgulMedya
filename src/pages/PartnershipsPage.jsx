@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useInView } from '../hooks/useInView';
 import { partnerships } from '../data/partnerships';
 import './PartnershipsPage.css';
 
 const PartnershipsPage = () => {
     const { t, language } = useLanguage();
+    const [gridRef, isGridInView] = useInView({ threshold: 0.05 });
 
-    // Category mapping for EN (Just for display on cards if needed, though filtering is removed)
+    // Category mapping for EN
     const trToEnCategories = {
         'Tümü': 'All',
         'Restoran': 'Restaurant',
@@ -34,11 +36,19 @@ const PartnershipsPage = () => {
 
             <section className="partnerships-content section">
                 <div className="container">
-                    <div className="partnerships-grid">
-                        {partnerships.map((partner) => (
-                            <div key={partner.id} className="partnership-card">
+                    <div className="partnerships-grid" ref={gridRef}>
+                        {partnerships.map((partner, index) => (
+                            <div
+                                key={partner.id}
+                                className={`partnership-card reveal stagger-${(index % 6) + 1} ${isGridInView ? 'visible' : ''}`}
+                            >
                                 <div className="partnership-image">
                                     <img src={partner.image} alt={partner.title} />
+                                    <div className="partnership-overlay">
+                                        <span className="view-project">
+                                            {language === 'tr' ? 'Projeyi Görüntüle' : 'View Project'}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="partnership-info">
                                     <span className="partnership-category">
