@@ -6,7 +6,7 @@ export const partnerships = [
         title: 'MEZECİM',
         category: 'Restoran',
         description: 'Mezecim için geliştirdiğimiz dijital çözümler ile marka bilinirliğini artırdık.',
-        image: '/images/partnerships/mezecim.jpg'
+        image: '/images/partnerships/mezecim.jpeg'
     },
     {
         id: 2,
@@ -14,7 +14,7 @@ export const partnerships = [
         title: 'ALP ŞARKÜTERİ',
         category: 'Gıda',
         description: 'Alp Şarküteri için kurumsal web sitesi ve dijital pazarlama hizmetleri sunduk.',
-        image: '/images/partnerships/alp-sarkuteri.jpg'
+        image: '/images/partnerships/alp-sarkuteri.jpeg'
     },
     {
         id: 3,
@@ -22,7 +22,7 @@ export const partnerships = [
         title: 'BALFI TOKEN',
         category: 'Kripto',
         description: 'Balfi Token için modern ve güvenli bir web platformu geliştirdik.',
-        image: '/images/partnerships/balfi-token.jpg'
+        image: '/images/partnerships/balfi-token.jpeg'
     },
     {
         id: 4,
@@ -30,7 +30,7 @@ export const partnerships = [
         title: 'LUMELLA DESIGN',
         category: 'Tasarım',
         description: 'Lumella Design için portföy web sitesi ve marka kimliği çalışması yaptık.',
-        image: '/images/partnerships/lumella-design.jpg'
+        image: '/images/partnerships/lumella-design.jpeg'
     },
     {
         id: 5,
@@ -38,7 +38,7 @@ export const partnerships = [
         title: 'ATA SAAT',
         category: 'Perakende',
         description: 'Ata Saat için e-ticaret altyapısı ve dijital pazarlama çözümleri geliştirdik.',
-        image: '/images/partnerships/ata-saat.jpg'
+        image: '/images/partnerships/ata-saat.jpeg'
     },
     {
         id: 6,
@@ -46,7 +46,7 @@ export const partnerships = [
         title: 'SEVGİ CEMBERİ DERSHANESİ',
         category: 'Eğitim',
         description: 'Sevgi Çemberi Dershanesi için kurumsal web sitesi ve öğrenci portalı oluşturduk.',
-        image: '/images/partnerships/sevgi-cemberi.jpg'
+        image: '/images/partnerships/sevgi-cemberi.jpeg'
     }
 ];
 
