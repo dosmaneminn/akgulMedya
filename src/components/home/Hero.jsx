@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { FaArrowRight, FaPlay } from 'react-icons/fa';
 import './Hero.css';
 
 const Hero = () => {
@@ -33,16 +32,6 @@ const Hero = () => {
                         Akgul Medya, markanızı bugünden geleceğe taşıyan tam kapsamlı dijital çözüm ortağınız.
                         Strateji, tasarım ve teknolojiyi birleştirerek işinizi büyüten çözümler üretiyoruz.
                     </p>
-                    <div className="hero-actions">
-                        <Link to="/hizmetler" className="btn btn-primary">
-                            Hizmetlerimiz
-                            <FaArrowRight />
-                        </Link>
-                        <Link to="/iletisim" className="btn btn-secondary">
-                            <FaPlay />
-                            Ücretsiz Teklif Al
-                        </Link>
-                    </div>
                 </div>
 
                 {/* Marquee Services */}

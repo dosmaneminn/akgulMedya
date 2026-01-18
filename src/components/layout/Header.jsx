@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaBars, FaTimes, FaPhone, FaEnvelope, FaChevronDown } from 'react-icons/fa';
+import { FaBars, FaTimes, FaPhone, FaEnvelope, FaChevronDown, FaWhatsapp, FaGlobe } from 'react-icons/fa';
 import './Header.css';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const [language, setLanguage] = useState('TR');
     const location = useLocation();
 
     useEffect(() => {
@@ -21,6 +22,10 @@ const Header = () => {
         setIsMobileMenuOpen(false);
         setActiveDropdown(null);
     }, [location]);
+
+    const toggleLanguage = () => {
+        setLanguage(language === 'TR' ? 'EN' : 'TR');
+    };
 
     const menuItems = [
         { path: '/', label: 'Ana Sayfa' },
@@ -95,9 +100,22 @@ const Header = () => {
                         </ul>
 
                         <div className="nav-actions">
-                            <Link to="/iletisim" className="btn btn-primary">
-                                Teklif Al
-                            </Link>
+                            {/* WhatsApp Button */}
+                            <a
+                                href="https://wa.me/905301764835"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="whatsapp-btn"
+                                title="WhatsApp"
+                            >
+                                <FaWhatsapp />
+                            </a>
+
+                            {/* Language Toggle */}
+                            <button className="language-toggle" onClick={toggleLanguage}>
+                                <FaGlobe />
+                                <span>{language}</span>
+                            </button>
 
                             <button
                                 className="mobile-menu-btn"
@@ -120,9 +138,16 @@ const Header = () => {
                             </li>
                         ))}
                     </ul>
-                    <Link to="/iletisim" className="btn btn-primary mobile-cta">
-                        Teklif Al
-                    </Link>
+                    <div className="mobile-actions">
+                        <a
+                            href="https://wa.me/905301764835"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-whatsapp"
+                        >
+                            <FaWhatsapp /> WhatsApp
+                        </a>
+                    </div>
                 </div>
             </header>
         </>
