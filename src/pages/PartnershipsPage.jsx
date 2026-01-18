@@ -1,19 +1,12 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import { partnerships, partnershipCategories } from '../data/partnerships';
+import { partnerships } from '../data/partnerships';
 import './PartnershipsPage.css';
 
 const PartnershipsPage = () => {
     const { t, language } = useLanguage();
-    const [selectedCategory, setSelectedCategory] = useState('Tümü');
 
-    // Reset category on language change
-    useEffect(() => {
-        setSelectedCategory(language === 'tr' ? 'Tümü' : 'All');
-    }, [language]);
-
-    // Category mapping for EN
+    // Category mapping for EN (Just for display on cards if needed, though filtering is removed)
     const trToEnCategories = {
         'Tümü': 'All',
         'Restoran': 'Restaurant',
@@ -23,23 +16,6 @@ const PartnershipsPage = () => {
         'Perakende': 'Retail',
         'Eğitim': 'Education'
     };
-
-    const enToTrCategories = Object.fromEntries(
-        Object.entries(trToEnCategories).map(([tr, en]) => [en, tr])
-    );
-
-    // Get categories based on language
-    const displayCategories = language === 'tr'
-        ? partnershipCategories
-        : partnershipCategories.map(cat => trToEnCategories[cat] || cat);
-
-    // Filter partnerships
-    const filteredPartnerships = partnerships.filter(partner => {
-        // Get the TR category for comparison (data is in TR)
-        const categoryToMatch = language === 'tr' ? selectedCategory : enToTrCategories[selectedCategory];
-        const matchesCategory = selectedCategory === 'Tümü' || selectedCategory === 'All' || partner.category === categoryToMatch;
-        return matchesCategory;
-    });
 
     return (
         <div className="partnerships-page">
@@ -52,28 +28,14 @@ const PartnershipsPage = () => {
                     </div>
                     <h1>{language === 'tr' ? 'İş Birliklerimiz' : 'Our Partnerships'}</h1>
                     <p>{language === 'tr' ? 'Başarıyla tamamladığımız iş birlikleri ve projelerimiz' : 'Our successfully completed partnerships and projects'}</p>
-                    <span className="partnership-count">{language === 'tr' ? 'Toplam' : 'Total'}: {filteredPartnerships.length}</span>
+                    <span className="partnership-count">{language === 'tr' ? 'Toplam' : 'Total'}: {partnerships.length}</span>
                 </div>
             </div>
 
             <section className="partnerships-content section">
                 <div className="container">
-                    <div className="filter-bar">
-                        <div className="category-filters">
-                            {displayCategories.map((category, index) => (
-                                <button
-                                    key={category}
-                                    className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
-                                    onClick={() => setSelectedCategory(category)}
-                                >
-                                    {category}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
                     <div className="partnerships-grid">
-                        {filteredPartnerships.map((partner) => (
+                        {partnerships.map((partner) => (
                             <div key={partner.id} className="partnership-card">
                                 <div className="partnership-image">
                                     <img src={partner.image} alt={partner.title} />

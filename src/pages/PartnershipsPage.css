@@ -18,55 +18,7 @@
     background: var(--bg-primary);
 }
 
-.filter-bar {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-bottom: 50px;
-    background: var(--bg-card);
-    padding: 24px;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-sm);
-}
-
-.filter-bar .category-filters {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    padding-bottom: 0;
-    border-bottom: none;
-    margin-bottom: 0;
-    width: 100%;
-}
-
-.filter-bar .filter-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 24px;
-    margin: 4px;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 30px;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
-
-.filter-bar .filter-btn:hover,
-.filter-bar .filter-btn.active {
-    background: var(--accent-primary);
-    border-color: var(--accent-primary);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(107, 203, 119, 0.3);
-}
+/* Filter styles removed */
 
 /* Search styles removed */
 
